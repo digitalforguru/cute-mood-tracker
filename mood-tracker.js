@@ -55,12 +55,15 @@ document.addEventListener("DOMContentLoaded", () => {
       cell.appendChild(content);
 
       cell.addEventListener('click', () => {
+        // Remove any existing mood menus
         const existingMenus = document.querySelectorAll('.mood-menu');
         existingMenus.forEach(menu => menu.remove());
 
+        // Create the popup menu
         const menu = document.createElement('div');
         menu.className = 'mood-menu';
 
+        // Add mood options
         moods.forEach(mood => {
           const option = document.createElement('div');
           option.className = 'mood-option';
@@ -94,7 +97,16 @@ document.addEventListener("DOMContentLoaded", () => {
           menu.appendChild(option);
         });
 
-        cell.appendChild(menu);
+        // Calculate position relative to the widget
+        const offsetTop = cell.offsetTop + cell.offsetHeight + 4;
+        const offsetLeft = cell.offsetLeft + (cell.offsetWidth / 2);
+
+        menu.style.top = `${offsetTop}px`;
+        menu.style.left = `${offsetLeft}px`;
+        menu.style.transform = 'translateX(-50%)';
+
+        // Add the menu inside the widget
+        widgetBox.appendChild(menu);
       });
 
       grid.appendChild(cell);

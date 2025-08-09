@@ -1,19 +1,41 @@
 document.addEventListener("DOMContentLoaded", () => {
   const days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
   const grid = document.getElementById('mood-grid');
+  const gifContainer = document.getElementById('gif-container');
 
-  function getWeekNumber(date = new Date()) {
-    const firstDay = new Date(date.getFullYear(), 0, 1);
-    const daysPassed = Math.floor((date - firstDay) / (24 * 60 * 60 * 1000));
-    return Math.ceil((daysPassed + firstDay.getDay() + 1) / 7);
+  const moods = [
+    { color: '#FFF5B7', label: 'good' },       // pastel yellow
+    { color: '#FCD5CE', label: 'loved' },      // blush pink
+    { color: '#C3DDFD', label: 'rough' },      // mellow blue
+    { color: '#E6E6FA', label: 'calm' },       // lavender
+    { color: '#FFDACC', label: 'social' },     // soft peach
+    { color: '#C4F1F9', label: 'focused' },    // mint
+    { color: '#D3D3D3', label: 'meh' },        // grey
+    { color: '#FFC0CB', label: 'awesome' }     // pink = special!
+  ];
+
+  const gifURL = "https://media.giphy.com/media/l0MYB8Ory7Hqefo9a/giphy.gif"; // sparkle gif
+
+  function getWeekKey() {
+    const date = new Date();
+    const onejan = new Date(date.getFullYear(), 0, 1);
+    const week = Math.ceil((((date - onejan) / 86400000) + onejan.getDay() + 1) / 7);
+    return `mood-week-${week}-${date.getFullYear()}`;
   }
 
-  const weekKey = `mood-week-${getWeekNumber()}-${new Date().getFullYear()}`;
+  const weekKey = getWeekKey();
   let moodData = JSON.parse(localStorage.getItem(weekKey)) || {};
 
   function saveMood(day, color) {
     moodData[day] = color;
     localStorage.setItem(weekKey, JSON.stringify(moodData));
+  }
+
+  function showGif() {
+    gifContainer.innerHTML = `<img src="${gifURL}" style="height: 80px;">`;
+    setTimeout(() => {
+      gifContainer.innerHTML = '';
+    }, 4000);
   }
 
   function createGrid() {
@@ -29,22 +51,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (moodData[day]) {
         cell.style.backgroundColor = moodData[day];
+        if (moodData[day] === '#FFC0CB') showGif(); // awesome mood triggers gif
       }
 
-      const colorInput = document.createElement('input');
-      colorInput.type = 'color';
-      colorInput.value = moodData[day] || '#f4c7c3';
-      colorInput.style.display = 'none';
-
-      colorInput.addEventListener('input', () => {
-        cell.style.backgroundColor = colorInput.value;
-        saveMood(day, colorInput.value);
-      });
-
-      cell.appendChild(colorInput);
-
       cell.addEventListener('click', () => {
-        colorInput.click();
+        const existingMenu = cell.querySelector('.mood-menu');
+        if (existingMenu) {
+          cell.removeChild(existingMenu);
+          return;
+        }
+
+        const menu = document.createElement('div');
+        menu.className = 'mood-menu';
+
+        moods.forEach(mood => {
+          const option = document.createElement('div');
+          option.className = 'mood-option';
+          option.style.backgroundColor = mood.color;
+
+          option.addEventListener('click', (e) => {
+            e.stopPropagation();
+            cell.style.backgroundColor = mood.color;
+            saveMood(day, mood.color);
+            if (mood.label === 'awesome') showGif();
+            menu.remove();
+          });
+
+          menu.appendChild(option);
+        });
+
+        cell.appendChild(menu);
       });
 
       grid.appendChild(cell);

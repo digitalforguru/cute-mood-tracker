@@ -5,10 +5,8 @@ body {
   background: #fafafa;
   color: #333;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  height: 100vh;
-  overflow-y: auto;
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
 }
 
@@ -54,6 +52,32 @@ h1 {
   color: #aaa;
 }
 
-input[type="color"] {
-  display: none;
+.mood-menu {
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 10;
 }
+
+.mood-option {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 1px solid #ccc;
+}
+
+#gif-container {
+  margin-top: 20px;
+  height: 80px;
+}
+

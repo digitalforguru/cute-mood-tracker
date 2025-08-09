@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   const days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
   const grid = document.getElementById('mood-grid');
-  const gifURL = "https://media.giphy.com/media/l0MYB8Ory7Hqefo9a/giphy.gif";
+  const widgetBox = document.getElementById('widget-box');
+  const gifURL = "https://i.pinimg.com/originals/9e/04/6b/9e046bd40cd5e178205311426057de98.gif";
 
   const moods = [
     { color: '#FFF5B7', label: 'good' },
@@ -100,16 +101,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   createGrid();
 
-  // Theme Picker
+  // Theme Picker Logic
   const themePicker = document.getElementById("theme-picker");
   const savedTheme = localStorage.getItem("selected-theme") || "pink";
-  document.body.classList.add(`theme-${savedTheme}`);
+
+  widgetBox.classList.add(`theme-${savedTheme}`);
   themePicker.value = savedTheme;
 
   themePicker.addEventListener("change", () => {
     const selected = themePicker.value;
-    document.body.className = '';
-    document.body.classList.add(`theme-${selected}`);
-    localStorage.setItem("selected-theme", selected);
-  });
-});
+    widgetBox.className = 'widget'; // reset
+    widget

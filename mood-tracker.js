@@ -90,6 +90,18 @@ document.addEventListener("DOMContentLoaded", () => {
   menu.appendChild(option);
 });
 
+
+  option.addEventListener('click', (e) => {
+    e.stopPropagation();
+    cell.style.backgroundColor = mood.color;
+    saveMood(day, mood.color);
+    if (mood.label === 'awesome') showGif();
+    menu.remove();
+  });
+
+  menu.appendChild(option);
+});
+
           option.addEventListener('click', (e) => {
             e.stopPropagation();
             cell.style.backgroundColor = mood.color;

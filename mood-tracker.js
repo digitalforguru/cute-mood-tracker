@@ -1,21 +1,20 @@
-console.log("Mood Tracker JS loaded!");
 document.addEventListener("DOMContentLoaded", () => {
   const days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
   const grid = document.getElementById('mood-grid');
   const gifContainer = document.getElementById('gif-container');
 
   const moods = [
-    { color: '#FFF5B7', label: 'good' },       // pastel yellow
-    { color: '#FCD5CE', label: 'loved' },      // blush pink
-    { color: '#C3DDFD', label: 'rough' },      // mellow blue
-    { color: '#E6E6FA', label: 'calm' },       // lavender
-    { color: '#FFDACC', label: 'social' },     // soft peach
-    { color: '#C4F1F9', label: 'focused' },    // mint
-    { color: '#D3D3D3', label: 'meh' },        // grey
-    { color: '#FFC0CB', label: 'awesome' }     // pink = special!
+    { color: '#FFF5B7', label: 'good' },
+    { color: '#FCD5CE', label: 'loved' },
+    { color: '#C3DDFD', label: 'rough' },
+    { color: '#E6E6FA', label: 'calm' },
+    { color: '#FFDACC', label: 'social' },
+    { color: '#C4F1F9', label: 'focused' },
+    { color: '#D3D3D3', label: 'meh' },
+    { color: '#FFC0CB', label: 'awesome' }
   ];
 
-  const gifURL = "https://media.giphy.com/media/l0MYB8Ory7Hqefo9a/giphy.gif"; // sparkle gif
+  const gifURL = "https://media.giphy.com/media/l0MYB8Ory7Hqefo9a/giphy.gif";
 
   function getWeekKey() {
     const date = new Date();
@@ -52,55 +51,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (moodData[day]) {
         cell.style.backgroundColor = moodData[day];
-        if (moodData[day] === '#FFC0CB') showGif(); // awesome mood triggers gif
+        if (moodData[day] === '#FFC0CB') showGif();
       }
 
       cell.addEventListener('click', () => {
-        const existingMenu = cell.querySelector('.mood-menu');
-        if (existingMenu) {
-          cell.removeChild(existingMenu);
-          return;
-        }
+        // Remove any existing mood menus
+        const existingMenus = document.querySelectorAll('.mood-menu');
+        existingMenus.forEach(menu => menu.remove());
 
         const menu = document.createElement('div');
         menu.className = 'mood-menu';
 
         moods.forEach(mood => {
-  const option = document.createElement('div');
-  option.className = 'mood-option';
+          const option = document.createElement('div');
+          option.className = 'mood-option';
 
-  const colorCircle = document.createElement('div');
-  colorCircle.className = 'mood-color';
-  colorCircle.style.backgroundColor = mood.color;
+          const colorCircle = document.createElement('div');
+          colorCircle.className = 'mood-color';
+          colorCircle.style.backgroundColor = mood.color;
 
-  const label = document.createElement('span');
-  label.textContent = mood.label;
+          const moodLabel = document.createElement('span');
+          moodLabel.textContent = mood.label;
 
-  option.appendChild(colorCircle);
-  option.appendChild(label);
-
-  option.addEventListener('click', (e) => {
-    e.stopPropagation();
-    cell.style.backgroundColor = mood.color;
-    saveMood(day, mood.color);
-    if (mood.label === 'awesome') showGif();
-    menu.remove();
-  });
-
-  menu.appendChild(option);
-});
-
-
-  option.addEventListener('click', (e) => {
-    e.stopPropagation();
-    cell.style.backgroundColor = mood.color;
-    saveMood(day, mood.color);
-    if (mood.label === 'awesome') showGif();
-    menu.remove();
-  });
-
-  menu.appendChild(option);
-});
+          option.appendChild(colorCircle);
+          option.appendChild(moodLabel);
 
           option.addEventListener('click', (e) => {
             e.stopPropagation();

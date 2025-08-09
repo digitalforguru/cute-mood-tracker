@@ -15,6 +15,13 @@ document.addEventListener("DOMContentLoaded", () => {
     { color: '#FFC0CB', label: 'awesome' }
   ];
 
+  const themes = {
+    pink: '#ffeef2',
+    green: '#e7f8ee',
+    lavender: '#f3e8ff',
+    blue: '#e0f0ff'
+  };
+
   function getWeekKey() {
     const date = new Date();
     const onejan = new Date(date.getFullYear(), 0, 1);
@@ -55,28 +62,11 @@ document.addEventListener("DOMContentLoaded", () => {
       cell.appendChild(content);
 
       cell.addEventListener('click', () => {
-        const existingMenus = document.querySelectorAll('.mood-menu');
-        existingMenus.forEach(menu => menu.remove());
+        document.querySelectorAll('.mood-menu').forEach(menu => menu.remove());
 
         const menu = document.createElement('div');
         menu.className = 'mood-menu';
 
         moods.forEach(mood => {
           const option = document.createElement('div');
-          option.className = 'mood-option';
-
-          const colorCircle = document.createElement('div');
-          colorCircle.className = 'mood-color';
-          colorCircle.style.backgroundColor = mood.color;
-
-          const label = document.createElement('span');
-          label.textContent = mood.label;
-
-          option.appendChild(colorCircle);
-          option.appendChild(label);
-
-          option.addEventListener('click', (e) => {
-            e.stopPropagation();
-
-            if (mood.label === 'awesome') {
-              content
+          option.className

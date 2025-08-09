@@ -8,21 +8,21 @@
 </head>
 <body>
 
-  <div class="container">
+  <!-- Theme Selector OUTSIDE the widget -->
+  <div class="controls">
+    <label for="theme-picker">theme: </label>
+    <select id="theme-picker">
+      <option value="pink">pastel pink</option>
+      <option value="green">pastel green</option>
+      <option value="lavender">lavender</option>
+      <option value="blue">baby blue</option>
+    </select>
+  </div>
+
+  <!-- Pastel "Widget Box" -->
+  <div class="widget" id="widget-box">
     <h1>mood tracker</h1>
-
-    <div class="theme-selector">
-      <label for="theme-picker">theme: </label>
-      <select id="theme-picker">
-        <option value="pink">pastel pink</option>
-        <option value="green">pastel green</option>
-        <option value="lavender">lavender</option>
-        <option value="blue">baby blue</option>
-      </select>
-    </div>
-
     <div class="grid" id="mood-grid"></div>
-    <div id="gif-container"></div>
   </div>
 
   <script src="mood-tracker.js"></script>

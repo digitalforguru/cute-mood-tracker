@@ -1,3 +1,4 @@
+console.log("Mood Tracker JS loaded!");
 document.addEventListener("DOMContentLoaded", () => {
   const days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
   const grid = document.getElementById('mood-grid');

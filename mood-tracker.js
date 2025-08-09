@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
   const grid = document.getElementById('mood-grid');
-  const gifContainer = document.getElementById('gif-container');
+  const gifURL = "https://media.giphy.com/media/l0MYB8Ory7Hqefo9a/giphy.gif";
 
   const moods = [
     { color: '#FFF5B7', label: 'good' },
@@ -14,8 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
     { color: '#FFC0CB', label: 'awesome' }
   ];
 
-  const gifURL = "https://media.giphy.com/media/l0MYB8Ory7Hqefo9a/giphy.gif";
-
   function getWeekKey() {
     const date = new Date();
     const onejan = new Date(date.getFullYear(), 0, 1);
@@ -26,16 +24,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const weekKey = getWeekKey();
   let moodData = JSON.parse(localStorage.getItem(weekKey)) || {};
 
-  function saveMood(day, color) {
-    moodData[day] = color;
+  function saveMood(day, value) {
+    moodData[day] = value;
     localStorage.setItem(weekKey, JSON.stringify(moodData));
-  }
-
-  function showGif() {
-    gifContainer.innerHTML = `<img src="${gifURL}" style="height: 80px;">`;
-    setTimeout(() => {
-      gifContainer.innerHTML = '';
-    }, 4000);
   }
 
   function createGrid() {
@@ -44,18 +35,20 @@ document.addEventListener("DOMContentLoaded", () => {
       cell.className = 'day-cell';
       cell.dataset.day = day;
 
-      const label = document.createElement('div');
-      label.className = 'day-label';
-      label.textContent = day;
-      cell.appendChild(label);
-
       if (moodData[day]) {
-        cell.style.backgroundColor = moodData[day];
-        if (moodData[day] === '#FFC0CB') showGif();
+        if (moodData[day] === 'awesome-gif') {
+          cell.innerHTML = `<img src="${gifURL}" style="width: 100%; height: 100%; border-radius: 8px;">`;
+        } else {
+          cell.style.backgroundColor = moodData[day];
+        }
+      } else {
+        const label = document.createElement('div');
+        label.className = 'day-label';
+        label.textContent = day;
+        cell.appendChild(label);
       }
 
       cell.addEventListener('click', () => {
-        // Remove any existing mood menus
         const existingMenus = document.querySelectorAll('.mood-menu');
         existingMenus.forEach(menu => menu.remove());
 
@@ -70,17 +63,28 @@ document.addEventListener("DOMContentLoaded", () => {
           colorCircle.className = 'mood-color';
           colorCircle.style.backgroundColor = mood.color;
 
-          const moodLabel = document.createElement('span');
-          moodLabel.textContent = mood.label;
+          const label = document.createElement('span');
+          label.textContent = mood.label;
 
           option.appendChild(colorCircle);
-          option.appendChild(moodLabel);
+          option.appendChild(label);
 
           option.addEventListener('click', (e) => {
             e.stopPropagation();
-            cell.style.backgroundColor = mood.color;
-            saveMood(day, mood.color);
-            if (mood.label === 'awesome') showGif();
+            cell.innerHTML = '';
+
+            if (mood.label === 'awesome') {
+              cell.innerHTML = `<img src="${gifURL}" style="width: 100%; height: 100%; border-radius: 8px;">`;
+              saveMood(day, 'awesome-gif');
+            } else {
+              const label = document.createElement('div');
+              label.className = 'day-label';
+              label.textContent = day;
+              cell.appendChild(label);
+              cell.style.backgroundColor = mood.color;
+              saveMood(day, mood.color);
+            }
+
             menu.remove();
           });
 
@@ -95,4 +99,17 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   createGrid();
+
+  // Theme Picker
+  const themePicker = document.getElementById("theme-picker");
+  const savedTheme = localStorage.getItem("selected-theme") || "pink";
+  document.body.classList.add(`theme-${savedTheme}`);
+  themePicker.value = savedTheme;
+
+  themePicker.addEventListener("change", () => {
+    const selected = themePicker.value;
+    document.body.className = '';
+    document.body.classList.add(`theme-${selected}`);
+    localStorage.setItem("selected-theme", selected);
+  });
 });

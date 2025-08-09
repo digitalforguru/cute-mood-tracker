@@ -18,7 +18,6 @@ body {
 
 .widget {
   position: relative;
-  overflow: hidden;
   width: 100%;
   max-width: 350px;
   background-color: #ffeef2;
@@ -28,6 +27,7 @@ body {
   box-sizing: border-box;
   margin: 20px auto;
   text-align: center;
+  overflow: hidden;
 }
 
 /* Header layout */
@@ -75,7 +75,7 @@ body {
   flex-direction: column;
   gap: 6px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  z-index: 1000;
+  z-index: 10000;
 }
 
 .theme-options.hidden {
@@ -95,6 +95,7 @@ body {
   border-color: #666;
 }
 
+/* Mood grid */
 .grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -131,6 +132,7 @@ body {
   align-items: center;
 }
 
+/* Mood menu */
 .mood-menu {
   position: absolute;
   top: 50%;
@@ -148,7 +150,6 @@ body {
   max-width: 300px;
   max-height: 200px;
   overflow-y: auto;
-  box-sizing: border-box;
 }
 
 .mood-option {
@@ -156,7 +157,6 @@ body {
   flex-direction: column;
   align-items: center;
   font-size: 10px;
-  text-transform: lowercase;
   color: #666;
   cursor: pointer;
   width: 48px;
@@ -171,7 +171,7 @@ body {
   border: 1px solid #ccc;
 }
 
-/* Themes */
+/* Theme colors */
 .theme-pink {
   background-color: #ffeef2;
 }

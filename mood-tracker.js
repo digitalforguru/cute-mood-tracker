@@ -15,13 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
     { color: '#FFC0CB', label: 'awesome' }
   ];
 
-  const themes = {
-    pink: '#ffeef2',
-    green: '#e7f8ee',
-    lavender: '#f3e8ff',
-    blue: '#e0f0ff'
-  };
-
   function getWeekKey() {
     const date = new Date();
     const onejan = new Date(date.getFullYear(), 0, 1);
@@ -62,11 +55,54 @@ document.addEventListener("DOMContentLoaded", () => {
       cell.appendChild(content);
 
       cell.addEventListener('click', () => {
-        document.querySelectorAll('.mood-menu').forEach(menu => menu.remove());
+        // Remove any existing mood menus
+        const existingMenus = document.querySelectorAll('.mood-menu');
+        existingMenus.forEach(menu => menu.remove());
 
+        // Create the popup menu
         const menu = document.createElement('div');
         menu.className = 'mood-menu';
 
+        // Add mood options
         moods.forEach(mood => {
           const option = document.createElement('div');
-          option.className
+          option.className = 'mood-option';
+
+          const colorCircle = document.createElement('div');
+          colorCircle.className = 'mood-color';
+          colorCircle.style.backgroundColor = mood.color;
+
+          const label = document.createElement('span');
+          label.textContent = mood.label;
+
+          option.appendChild(colorCircle);
+          option.appendChild(label);
+
+          option.addEventListener('click', (e) => {
+            e.stopPropagation();
+
+            if (mood.label === 'awesome') {
+              content.innerHTML = `<img src="${gifURL}" style="width: 100%; height: 100%; border-radius: 8px;">`;
+              content.style.backgroundColor = '';
+              saveMood(day, 'awesome-gif');
+            } else {
+              content.innerHTML = '';
+              content.style.backgroundColor = mood.color;
+              saveMood(day, mood.color);
+            }
+
+            menu.remove();
+          });
+
+          menu.appendChild(option);
+        });
+
+        // Calculate position relative to the widget
+        menu.style.position = 'absolute';
+        menu.style.top = '50%';
+        menu.style.left = '50%';
+        menu.style.transform = 'translate(-50%, -50%)';
+
+        // Add the menu inside the widget
+        widget
+

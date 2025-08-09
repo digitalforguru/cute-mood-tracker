@@ -19,11 +19,11 @@ document.addEventListener("DOMContentLoaded", () => {
   function createGrid() {
     days.forEach(day => {
       const cell = document.createElement('div');
-      cell.classList.add('day-cell');
+      cell.className = 'day-cell';
       cell.dataset.day = day;
 
       const label = document.createElement('div');
-      label.classList.add('day-label');
+      label.className = 'day-label';
       label.textContent = day;
       cell.appendChild(label);
 
@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const colorInput = document.createElement('input');
       colorInput.type = 'color';
       colorInput.value = moodData[day] || '#f2b5d4';
+      colorInput.style.display = 'none';
 
       colorInput.addEventListener('input', () => {
         cell.style.backgroundColor = colorInput.value;
@@ -52,3 +53,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
   createGrid();
 });
+

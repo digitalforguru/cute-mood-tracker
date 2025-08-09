@@ -69,12 +69,24 @@ h1 {
 }
 
 .mood-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 10px;
+  text-transform: lowercase;
+  color: #666;
+  cursor: pointer;
+  width: 40px;
+}
+
+.mood-color {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  cursor: pointer;
+  margin-bottom: 4px;
   border: 1px solid #ccc;
 }
+
 
 #gif-container {
   margin-top: 20px;

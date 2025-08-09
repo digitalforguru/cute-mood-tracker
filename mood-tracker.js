@@ -113,19 +113,54 @@ menu.style.transform = 'translate(-50%, -50%)';
     });
   }
 
-  createGrid();
+  
+ // THEME SELECTOR (colored circle dropdown)
+const currentThemeCircle = document.querySelector('.current-theme-circle');
+const themeOptions = document.querySelector('.theme-options');
 
-  // Theme Picker Logic
-  const themePicker = document.getElementById("theme-picker");
-  const savedTheme = localStorage.getItem("selected-theme") || "pink";
+const themes = {
+  pink: '#ffeef2',
+  green: '#e7f8ee',
+  lavender: '#f3e8ff',
+  blue: '#e0f0ff'
+};
 
-  widgetBox.classList.add(`theme-${savedTheme}`);
-  themePicker.value = savedTheme;
+function setTheme(theme) {
+  widgetBox.className = 'widget';
+  widgetBox.classList.add(`theme-${theme}`);
+  currentThemeCircle.style.backgroundColor = themes[theme];
+  localStorage.setItem("selected-theme", theme);
+}
 
-  themePicker.addEventListener("change", () => {
-    const selected = themePicker.value;
-    widgetBox.className = 'widget';
-    widgetBox.classList.add(`theme-${selected}`);
-    localStorage.setItem("selected-theme", selected);
+// Generate color options as small circles
+Object.entries(themes).forEach(([theme, color]) => {
+  const circle = document.createElement('div');
+  circle.className = 'theme-option-circle';
+  circle.style.backgroundColor = color;
+  circle.title = theme;
+
+  circle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setTheme(theme);
+    themeOptions.classList.add('hidden');
   });
+
+  themeOptions.appendChild(circle);
+});
+
+// Load saved or default theme
+const savedTheme = localStorage.getItem("selected-theme") || "pink";
+setTheme(savedTheme);
+
+// Toggle dropdown on click
+currentThemeCircle.addEventListener('click', (e) => {
+  e.stopPropagation();
+  themeOptions.classList.toggle('hidden');
+});
+
+// Close dropdown if you click outside
+document.addEventListener('click', () => {
+  themeOptions.classList.add('hidden');
+});
+
 });

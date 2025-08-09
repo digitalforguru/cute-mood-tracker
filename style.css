@@ -5,40 +5,66 @@
 
 body {
   font-family: 'Helvetica Neue', sans-serif;
-  background-color: var(--bg);
-  color: var(--text);
   margin: 0;
   padding: 20px;
-  transition: background 0.4s, color 0.4s;
+  background: #fdfdfd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 h1 {
   font-weight: 300;
-  font-size: 20px;
+  font-size: 18px;
   text-align: center;
   margin-bottom: 15px;
-  letter-spacing: 1px;
+  text-transform: lowercase;
+  letter-spacing: 0.5px;
+  color: var(--text);
 }
 
-.container {
-  max-width: 300px;
-  margin: 0 auto;
+.controls {
+  margin-bottom: 15px;
+  font-size: 12px;
+  text-transform: lowercase;
+  color: #666;
 }
 
+select {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+}
+
+/* Pastel mood widget box */
+.widget {
+  width: 340px;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background 0.3s, color 0.3s;
+}
+
+/* Horizontal mood tracker grid */
 .grid {
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
 }
 
 .day-cell {
   background-color: #f2f2f2;
   border-radius: 8px;
-  padding: 10px;
+  padding: 6px;
   text-align: center;
   cursor: pointer;
   position: relative;
-  height: 80px;
+  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -47,12 +73,13 @@ h1 {
 
 .day-label {
   font-size: 12px;
+  text-transform: lowercase;
   color: var(--text);
 }
 
 .mood-menu {
   position: absolute;
-  top: 50px;
+  top: 60px;
   left: 50%;
   transform: translateX(-50%);
   background: white;
@@ -86,13 +113,7 @@ h1 {
   border: 1px solid #ccc;
 }
 
-.theme-selector {
-  margin-bottom: 15px;
-  font-size: 12px;
-  text-transform: lowercase;
-  color: var(--text);
-}
-
+/* Theme styles apply to .widget */
 .theme-pink {
   --bg: #fff0f5;
   --text: #a85b8f;

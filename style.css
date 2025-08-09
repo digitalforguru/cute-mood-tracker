@@ -24,7 +24,7 @@ h1 {
 }
 
 .controls {
-  margin-bottom: 15px;
+  margin-top: 20px;
   font-size: 12px;
   text-transform: lowercase;
   color: #666;
@@ -39,7 +39,7 @@ select {
   cursor: pointer;
 }
 
-/* Pastel mood widget box */
+/* Widget container */
 .widget {
   width: 340px;
   padding: 20px;
@@ -50,13 +50,14 @@ select {
   transition: background 0.3s, color 0.3s;
 }
 
-/* Horizontal mood tracker grid */
+/* Horizontal grid */
 .grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 8px;
 }
 
+/* Mood boxes */
 .day-cell {
   background-color: #f2f2f2;
   border-radius: 8px;
@@ -113,7 +114,7 @@ select {
   border: 1px solid #ccc;
 }
 
-/* Theme styles apply to .widget */
+/* Theme styles */
 .theme-pink {
   --bg: #fff0f5;
   --text: #a85b8f;
@@ -133,4 +134,3 @@ select {
   --bg: #f0f8ff;
   --text: #5a7ea8;
 }
-

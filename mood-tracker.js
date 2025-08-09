@@ -98,17 +98,11 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         // Calculate position relative to the widget
-       const cellRect = cell.getBoundingClientRect();
-const widgetRect = widgetBox.getBoundingClientRect();
+       menu.style.position = 'absolute';
+menu.style.top = '50%';
+menu.style.left = '50%';
+menu.style.transform = 'translate(-50%, -50%)';
 
-// Compute position relative to widget
-const offsetTop = cellRect.top - widgetRect.top + cell.offsetHeight + 4;
-const offsetLeft = cellRect.left - widgetRect.left + (cell.offsetWidth / 2);
-
-menu.style.position = 'absolute';
-menu.style.top = `${offsetTop}px`;
-menu.style.left = `${offsetLeft}px`;
-menu.style.transform = 'translateX(-50%)';
 
 
         // Add the menu inside the widget

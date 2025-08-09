@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
   const grid = document.getElementById('mood-grid');
   const widgetBox = document.getElementById('widget-box');
-  const gifURL = "https://i.pinimg.com/originals/9e/04/6b/9e046bd40cd5e178205311426057de98.gif";
+  const gifURL = "https://media.giphy.com/media/l0MYB8Ory7Hqefo9a/giphy.gif";
 
   const moods = [
     { color: '#FFF5B7', label: 'good' },
@@ -36,18 +36,23 @@ document.addEventListener("DOMContentLoaded", () => {
       cell.className = 'day-cell';
       cell.dataset.day = day;
 
+      const label = document.createElement('div');
+      label.className = 'day-label';
+      label.textContent = day;
+      cell.appendChild(label);
+
+      const content = document.createElement('div');
+      content.className = 'day-content';
+
       if (moodData[day]) {
         if (moodData[day] === 'awesome-gif') {
-          cell.innerHTML = `<img src="${gifURL}" style="width: 100%; height: 100%; border-radius: 8px;">`;
+          content.innerHTML = `<img src="${gifURL}" style="width: 100%; height: 100%; border-radius: 8px;">`;
         } else {
-          cell.style.backgroundColor = moodData[day];
+          content.style.backgroundColor = moodData[day];
         }
-      } else {
-        const label = document.createElement('div');
-        label.className = 'day-label';
-        label.textContent = day;
-        cell.appendChild(label);
       }
+
+      cell.appendChild(content);
 
       cell.addEventListener('click', () => {
         const existingMenus = document.querySelectorAll('.mood-menu');
@@ -72,17 +77,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
           option.addEventListener('click', (e) => {
             e.stopPropagation();
-            cell.innerHTML = '';
 
             if (mood.label === 'awesome') {
-              cell.innerHTML = `<img src="${gifURL}" style="width: 100%; height: 100%; border-radius: 8px;">`;
+              content.innerHTML = `<img src="${gifURL}" style="width: 100%; height: 100%; border-radius: 8px;">`;
+              content.style.backgroundColor = '';
               saveMood(day, 'awesome-gif');
             } else {
-              const label = document.createElement('div');
-              label.className = 'day-label';
-              label.textContent = day;
-              cell.appendChild(label);
-              cell.style.backgroundColor = mood.color;
+              content.innerHTML = '';
+              content.style.backgroundColor = mood.color;
               saveMood(day, mood.color);
             }
 
@@ -101,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   createGrid();
 
-  // Theme Picker Logic
+  // Theme Picker
   const themePicker = document.getElementById("theme-picker");
   const savedTheme = localStorage.getItem("selected-theme") || "pink";
 
@@ -115,4 +117,3 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("selected-theme", selected);
   });
 });
-

@@ -3,16 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>mood tracker</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap" rel="stylesheet">
+  <title>Mood Tracker</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
+
   <div class="container">
-    <h1>weekly mood tracker</h1>
+    <h1>mood tracker</h1>
+
+    <div class="theme-selector">
+      <label for="theme-picker">theme: </label>
+      <select id="theme-picker">
+        <option value="pink">pastel pink</option>
+        <option value="green">pastel green</option>
+        <option value="lavender">lavender</option>
+        <option value="blue">baby blue</option>
+      </select>
+    </div>
+
     <div class="grid" id="mood-grid"></div>
+    <div id="gif-container"></div>
   </div>
-  <div id="gif-container"></div>
+
   <script src="mood-tracker.js"></script>
 </body>
 </html>

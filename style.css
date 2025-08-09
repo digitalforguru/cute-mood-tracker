@@ -7,7 +7,7 @@
 body {
   margin: 0;
   font-family: 'Work Sans', sans-serif;
-  background: transparent; /* <-- change this */
+  background: transparent;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,7 +18,7 @@ body {
 
 .widget {
   position: relative;
-  overflow: hidden; /* 👈 LOCKS CONTENT INSIDE */
+  overflow: hidden;
   width: 100%;
   max-width: 350px;
   background-color: #ffeef2;
@@ -30,15 +30,69 @@ body {
   text-align: center;
 }
 
-.mood-btn {
-  font-size: 1.5rem;
-  padding: 8px 12px;
+/* Header layout */
+.widget-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
 }
 
-h1 {
-  margin: 0 0 12px;
+.widget-header h1 {
+  margin: 0;
   font-weight: 300;
   font-size: 20px;
+  text-transform: lowercase;
+}
+
+/* Theme selector */
+.theme-selector {
+  position: relative;
+  cursor: pointer;
+}
+
+.current-theme-circle {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1.5px solid #ccc;
+  transition: border-color 0.3s;
+}
+
+.current-theme-circle:hover {
+  border-color: #666;
+}
+
+.theme-options {
+  position: absolute;
+  top: 24px;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  z-index: 1000;
+}
+
+.theme-options.hidden {
+  display: none;
+}
+
+.theme-option-circle {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1.5px solid #ccc;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.theme-option-circle:hover {
+  border-color: #666;
 }
 
 .grid {
@@ -76,11 +130,12 @@ h1 {
   justify-content: center;
   align-items: center;
 }
+
 .mood-menu {
   position: absolute;
-  top: 100%; /* 👈 Makes it appear below the clicked day */
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   background: white;
   padding: 10px;
   border: 1px solid #ddd;
@@ -95,7 +150,6 @@ h1 {
   overflow-y: auto;
   box-sizing: border-box;
 }
-
 
 .mood-option {
   display: flex;
@@ -117,20 +171,6 @@ h1 {
   border: 1px solid #ccc;
 }
 
-.controls {
-  margin-top: 10px;
-  font-size: 12px;
-  text-transform: lowercase;
-}
-
-select {
-  font-family: 'Work Sans', sans-serif;
-  font-size: 12px;
-  padding: 4px 8px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-
 /* Themes */
 .theme-pink {
   background-color: #ffeef2;
@@ -143,72 +183,4 @@ select {
 }
 .theme-blue {
   background-color: #e0f0ff;
-}
-/* ---------------------------------------- */
-/* 💡 Theme selector styles (insert at end) */
-/* ---------------------------------------- */
-
-/* Header layout */
-.widget-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
-}
-
-.widget-header h1 {
-  margin: 0;
-  font-weight: 300;
-  font-size: 20px;
-  text-transform: lowercase;
-}
-
-/* Theme selector */
-.theme-selector {
-  position: relative;
-  cursor: pointer;
-}
-
-.current-theme-circle {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  border: 1.5px solid #ccc;
-  transition: border-color 0.3s;
-}
-
-.current-theme-circle:hover {
-  border-color: #666;
-}
-
-.theme-options {
-  position: absolute;
-  top: 24px; /* just below the current circle */
-  right: 0;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 6px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  z-index: 10000;
-}
-
-.theme-options.hidden {
-  display: none;
-}
-
-.theme-option-circle {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  border: 1.5px solid #ccc;
-  cursor: pointer;
-  transition: border-color 0.3s;
-}
-
-.theme-option-circle:hover {
-  border-color: #666;
 }

@@ -1,55 +1,53 @@
-body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  font-weight: 300;
-  background: #fafafa;
-  color: #333;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
+:root {
+  --bg: #fff;
+  --text: #333;
 }
 
-.container {
-  text-align: center;
-  max-width: 400px;
-  width: 100%;
+body {
+  font-family: 'Helvetica Neue', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  margin: 0;
+  padding: 20px;
+  transition: background 0.4s, color 0.4s;
 }
 
 h1 {
-  text-transform: lowercase;
-  font-size: 1.2rem;
-  margin-bottom: 20px;
   font-weight: 300;
-  color: #888;
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+}
+
+.container {
+  max-width: 300px;
+  margin: 0 auto;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(7, 44px);
-  grid-gap: 10px;
-  justify-content: center;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 10px;
 }
 
 .day-cell {
-  width: 44px;
-  height: 44px;
-  background: #eaeaea;
+  background-color: #f2f2f2;
   border-radius: 8px;
+  padding: 10px;
+  text-align: center;
   cursor: pointer;
   position: relative;
-  transition: background 0.3s ease;
-  border: 1px solid #ddd;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .day-label {
-  position: absolute;
-  top: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 10px;
-  text-transform: lowercase;
-  color: #aaa;
+  font-size: 12px;
+  color: var(--text);
 }
 
 .mood-menu {
@@ -67,7 +65,6 @@ h1 {
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   z-index: 10;
 }
-
 
 .mood-option {
   display: flex;
@@ -89,8 +86,30 @@ h1 {
   border: 1px solid #ccc;
 }
 
-#gif-container {
-  margin-top: 20px;
-  height: 80px;
+.theme-selector {
+  margin-bottom: 15px;
+  font-size: 12px;
+  text-transform: lowercase;
+  color: var(--text);
+}
+
+.theme-pink {
+  --bg: #fff0f5;
+  --text: #a85b8f;
+}
+
+.theme-green {
+  --bg: #f0fff4;
+  --text: #5c8f6f;
+}
+
+.theme-lavender {
+  --bg: #f5f3ff;
+  --text: #6a5acd;
+}
+
+.theme-blue {
+  --bg: #f0f8ff;
+  --text: #5a7ea8;
 }
 

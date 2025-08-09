@@ -8,18 +8,21 @@
 </head>
 <body>
 
+  <!-- WIDGET BOX -->
   <div class="widget" id="widget-box">
-    <div class="widget-header">
-      <h1>mood tracker</h1>
-      <div class="theme-selector">
-        <div class="current-theme-circle" title="Change theme"></div>
-        <div class="theme-options hidden">
-          <!-- Circles added via JS -->
-        </div>
-      </div>
-    </div>
-
+    <h1>mood tracker</h1>
     <div class="grid" id="mood-grid"></div>
+  </div>
+
+  <!-- THEME SELECTOR BELOW WIDGET -->
+  <div class="controls">
+    <label for="theme-picker">theme: </label>
+    <select id="theme-picker">
+      <option value="pink">pastel pink</option>
+      <option value="green">pastel green</option>
+      <option value="lavender">lavender</option>
+      <option value="blue">baby blue</option>
+    </select>
   </div>
 
   <script src="mood-tracker.js"></script>

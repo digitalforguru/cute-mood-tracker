@@ -55,15 +55,12 @@ document.addEventListener("DOMContentLoaded", () => {
       cell.appendChild(content);
 
       cell.addEventListener('click', () => {
-        // Remove any existing mood menus
         const existingMenus = document.querySelectorAll('.mood-menu');
         existingMenus.forEach(menu => menu.remove());
 
-        // Create the popup menu
         const menu = document.createElement('div');
         menu.className = 'mood-menu';
 
-        // Add mood options
         moods.forEach(mood => {
           const option = document.createElement('div');
           option.className = 'mood-option';
@@ -82,85 +79,4 @@ document.addEventListener("DOMContentLoaded", () => {
             e.stopPropagation();
 
             if (mood.label === 'awesome') {
-              content.innerHTML = `<img src="${gifURL}" style="width: 100%; height: 100%; border-radius: 8px;">`;
-              content.style.backgroundColor = '';
-              saveMood(day, 'awesome-gif');
-            } else {
-              content.innerHTML = '';
-              content.style.backgroundColor = mood.color;
-              saveMood(day, mood.color);
-            }
-
-            menu.remove();
-          });
-
-          menu.appendChild(option);
-        });
-
-        // Calculate position relative to the widget
-       menu.style.position = 'absolute';
-menu.style.top = '50%';
-menu.style.left = '50%';
-menu.style.transform = 'translate(-50%, -50%)';
-
-
-
-        // Add the menu inside the widget
-        widgetBox.appendChild(menu);
-      });
-
-      grid.appendChild(cell);
-    });
-  }
-
-  
- // THEME SELECTOR (colored circle dropdown)
-const currentThemeCircle = document.querySelector('.current-theme-circle');
-const themeOptions = document.querySelector('.theme-options');
-
-const themes = {
-  pink: '#ffeef2',
-  green: '#e7f8ee',
-  lavender: '#f3e8ff',
-  blue: '#e0f0ff'
-};
-
-function setTheme(theme) {
-  widgetBox.className = 'widget';
-  widgetBox.classList.add(`theme-${theme}`);
-  currentThemeCircle.style.backgroundColor = themes[theme];
-  localStorage.setItem("selected-theme", theme);
-}
-
-// Generate color options as small circles
-Object.entries(themes).forEach(([theme, color]) => {
-  const circle = document.createElement('div');
-  circle.className = 'theme-option-circle';
-  circle.style.backgroundColor = color;
-  circle.title = theme;
-
-  circle.addEventListener('click', (e) => {
-    e.stopPropagation();
-    setTheme(theme);
-    themeOptions.classList.add('hidden');
-  });
-
-  themeOptions.appendChild(circle);
-});
-
-// Load saved or default theme
-const savedTheme = localStorage.getItem("selected-theme") || "pink";
-setTheme(savedTheme);
-
-// Toggle dropdown on click
-currentThemeCircle.addEventListener('click', (e) => {
-  e.stopPropagation();
-  themeOptions.classList.toggle('hidden');
-});
-
-// Close dropdown if you click outside
-document.addEventListener('click', () => {
-  themeOptions.classList.add('hidden');
-});
-
-});
+              content

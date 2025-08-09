@@ -17,7 +17,8 @@ body {
 }
 
 .widget {
-  position: relative; /* 👈 Add this */
+  position: relative;
+  overflow: hidden; /* 👈 LOCKS CONTENT INSIDE */
   width: 100%;
   max-width: 350px;
   background-color: #ffeef2;

@@ -66,9 +66,29 @@ document.addEventListener("DOMContentLoaded", () => {
         menu.className = 'mood-menu';
 
         moods.forEach(mood => {
-          const option = document.createElement('div');
-          option.className = 'mood-option';
-          option.style.backgroundColor = mood.color;
+  const option = document.createElement('div');
+  option.className = 'mood-option';
+
+  const colorCircle = document.createElement('div');
+  colorCircle.className = 'mood-color';
+  colorCircle.style.backgroundColor = mood.color;
+
+  const label = document.createElement('span');
+  label.textContent = mood.label;
+
+  option.appendChild(colorCircle);
+  option.appendChild(label);
+
+  option.addEventListener('click', (e) => {
+    e.stopPropagation();
+    cell.style.backgroundColor = mood.color;
+    saveMood(day, mood.color);
+    if (mood.label === 'awesome') showGif();
+    menu.remove();
+  });
+
+  menu.appendChild(option);
+});
 
           option.addEventListener('click', (e) => {
             e.stopPropagation();

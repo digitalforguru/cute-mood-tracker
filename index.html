@@ -8,7 +8,13 @@
 </head>
 <body>
 
-  <!-- Theme Selector OUTSIDE the widget -->
+  <!-- Widget Box -->
+  <div class="widget" id="widget-box">
+    <h1>mood tracker</h1>
+    <div class="grid" id="mood-grid"></div>
+  </div>
+
+  <!-- Theme Selector BELOW the widget -->
   <div class="controls">
     <label for="theme-picker">theme: </label>
     <select id="theme-picker">
@@ -17,12 +23,6 @@
       <option value="lavender">lavender</option>
       <option value="blue">baby blue</option>
     </select>
-  </div>
-
-  <!-- Pastel "Widget Box" -->
-  <div class="widget" id="widget-box">
-    <h1>mood tracker</h1>
-    <div class="grid" id="mood-grid"></div>
   </div>
 
   <script src="mood-tracker.js"></script>
